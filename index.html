@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#4054B2">
+<title>Programm · Südstadtfest Köln 2026</title>
+<meta name="description" content="Bühnenprogramm Südstadtfest Köln – 13. & 14. Juni 2026. Wer spielt wann auf der Bonner Straße.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+  /* --- PROTOTYPE NOTE ---
+     Production: Assistant als woff2 lokal gehostet, kein Google Fonts CDN
+  */
+
+  :root {
+    --blau: #4054B2;
+    --blau-deep: #2A3A8C;
+    --blau-light: #5B6DC7;
+    --gelb: #F1FF38;
+    --gelb-soft: #f5ff6a;
+    --weiss: #FFFFFF;
+    --grau-100: #F4F5F9;
+    --grau-200: #E2E4ED;
+    --grau-500: #8B90A5;
+    --grau-800: #2D2F3A;
+    --text: #1A1B2E;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 64px;
+  }
+
+  body {
+    font-family: 'Assistant', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--grau-100);
+    color: var(--text);
+    min-height: 100dvh;
+    overflow-x: hidden;
+  }
+
+  /* ===== HEADER ===== */
+  .header {
+    background: var(--blau);
+    color: var(--weiss);
+    padding: 20px 20px 16px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -30px;
+    right: -30px;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: rgba(241, 255, 56, 0.08);
+  }
+
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: -20px;
+    left: -20px;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.04);
+  }
+
+  .logo-text {
+    font-size: 26px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    position: relative;
+  }
+
+  .logo-sub {
+    font-size: 14px;
+    font-weight: 400;
+    opacity: 0.85;
+    margin-top: 3px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+
+  /* ===== TABS ===== */
+  .tabs-wrapper {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--weiss);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  }
+
+  .tabs {
+    display: flex;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  .tab {
+    flex: 1;
+    padding: 14px 8px;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--grau-500);
+    background: var(--grau-100);
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+  }
+
+  .tab.active {
+    color: var(--weiss);
+    background: var(--blau);
+    box-shadow: inset 0 -3px 0 rgba(0,0,0,0.15), 0 4px 12px rgba(64, 84, 178, 0.35);
+    z-index: 2;
+  }
+
+  .tab:not(.active):active {
+    background: var(--grau-200);
+  }
+
+  .tab .tab-day {
+    display: block;
+    font-size: 16px;
+    font-weight: 800;
+  }
+
+  .tab .tab-date {
+    display: block;
+    font-size: 13px;
+    font-weight: 700;
+    margin-top: 2px;
+    opacity: 0.55;
+  }
+
+  .tab.active .tab-date {
+    opacity: 0.9;
+  }
+
+  /* ===== JETZT LIVE BANNER ===== */
+  .now-banner {
+    background: var(--gelb);
+    color: var(--blau-deep);
+    padding: 12px 20px;
+    font-size: 15px;
+    font-weight: 700;
+    text-align: center;
+    letter-spacing: 0.5px;
+    display: none;
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+  .now-banner.visible {
+    display: block;
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.85; }
+  }
+
+  .now-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background: #E53E3E;
+    border-radius: 50%;
+    margin-right: 6px;
+    animation: blink 1.5s ease-in-out infinite;
+    vertical-align: middle;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  /* ===== TIMELINE ===== */
+  .day-content {
+    display: none;
+    padding: 0 0 100px;
+  }
+
+  .day-content.active {
+    display: block;
+  }
+
+  .timeline {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 16px 16px 0;
+  }
+
+  .slot {
+    display: flex;
+    gap: 16px;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--grau-200);
+    position: relative;
+    transition: all 0.3s ease;
+  }
+
+  .slot:last-child {
+    border-bottom: none;
+  }
+
+  /* Jetzt-Marker */
+  .slot.now {
+    background: var(--weiss);
+    margin: 10px -16px;
+    padding: 20px 16px;
+    border-radius: 14px;
+    border-bottom: none;
+    box-shadow: 0 2px 16px rgba(64, 84, 178, 0.12);
+    border-left: 5px solid var(--gelb);
+  }
+
+  .slot.now + .slot {
+    border-top: none;
+  }
+
+  .slot-time {
+    flex-shrink: 0;
+    width: 64px;
+    padding-top: 4px;
+    text-align: center;
+  }
+
+  .time-value {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--blau);
+    line-height: 1;
+  }
+
+  .time-label {
+    font-size: 11px;
+    color: var(--grau-500);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 4px;
+  }
+
+  .slot.now .time-value {
+    color: var(--blau-deep);
+    font-size: 22px;
+  }
+
+  .slot.now .time-label {
+    color: var(--blau);
+    font-weight: 700;
+  }
+
+  .slot-info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .act-name {
+    font-size: 20px;
+    font-weight: 800;
+    line-height: 1.3;
+    color: var(--text);
+  }
+
+  .slot.now .act-name {
+    font-size: 23px;
+  }
+
+  .act-meta {
+    font-size: 14px;
+    color: var(--grau-500);
+    margin-top: 4px;
+    line-height: 1.4;
+  }
+
+  .act-badge {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    margin-top: 8px;
+  }
+
+  .badge-live {
+    background: rgba(64, 84, 178, 0.1);
+    color: var(--blau);
+  }
+
+  .badge-highlight {
+    background: var(--gelb);
+    color: var(--blau-deep);
+  }
+
+  /* ===== LIVE TIMER ===== */
+  .act-timer {
+    font-size: 14px;
+    font-weight: 700;
+    margin-top: 6px;
+    display: none;
+  }
+
+  .act-timer.visible {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .act-timer.timer-now {
+    color: #E53E3E;
+  }
+
+  .act-timer.timer-next {
+    color: var(--blau);
+  }
+
+  .act-timer.timer-later {
+    color: var(--grau-500);
+  }
+
+  .act-timer.timer-past {
+    color: var(--grau-500);
+    opacity: 0.5;
+    font-weight: 400;
+  }
+
+  .slot.past {
+    opacity: 0.45;
+  }
+
+  .timer-icon {
+    font-size: 12px;
+  }
+
+  /* ===== ACCESSIBILITY ===== */
+  .tab:focus-visible {
+    outline: 3px solid var(--gelb);
+    outline-offset: -3px;
+  }
+
+  .footer-social a:focus-visible {
+    outline: 3px solid var(--blau);
+    outline-offset: 2px;
+  }
+
+  .cross-link-btn:focus-visible {
+    outline: 3px solid var(--gelb);
+    outline-offset: 2px;
+  }
+
+  @media (prefers-contrast: high) {
+    .slot { border-bottom: 2px solid var(--grau-800); }
+    .time-value { color: var(--text); }
+    .act-meta { color: var(--grau-800); }
+    .tab:not(.active) { color: var(--text); }
+  }
+
+  /* ===== CROSS-LINK BANNER ===== */
+  .cross-link {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--blau-deep);
+    color: var(--weiss);
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 200;
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.15);
+    padding-bottom: max(14px, env(safe-area-inset-bottom));
+  }
+
+  .cross-link-text {
+    font-size: 14px;
+    font-weight: 400;
+    opacity: 0.9;
+  }
+
+  .cross-link-btn {
+    background: var(--gelb);
+    color: var(--blau-deep);
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 800;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 22px;
+    cursor: pointer;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: transform 0.15s ease;
+    flex-shrink: 0;
+  }
+
+  .cross-link-btn:active {
+    transform: scale(0.95);
+  }
+
+  /* ===== FOOTER ===== */
+  .footer {
+    text-align: center;
+    padding: 32px 20px 24px;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  .footer-social a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--blau);
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 12px 24px;
+    border-radius: 28px;
+    background: var(--weiss);
+    border: 1.5px solid var(--grau-200);
+    transition: all 0.2s ease;
+  }
+
+  .footer-social a:active {
+    background: var(--grau-200);
+    transform: scale(0.97);
+  }
+
+  .footer-copy {
+    font-size: 11px;
+    color: var(--grau-500);
+    margin-top: 16px;
+  }
+
+  /* ===== STAGGER ANIMATION ===== */
+  .slot {
+    opacity: 0;
+    transform: translateY(12px);
+    animation: slot-in 0.35s ease forwards;
+  }
+
+  @keyframes slot-in {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .slot:nth-child(1) { animation-delay: 0.05s; }
+  .slot:nth-child(2) { animation-delay: 0.1s; }
+  .slot:nth-child(3) { animation-delay: 0.15s; }
+  .slot:nth-child(4) { animation-delay: 0.2s; }
+  .slot:nth-child(5) { animation-delay: 0.25s; }
+  .slot:nth-child(6) { animation-delay: 0.3s; }
+  .slot:nth-child(7) { animation-delay: 0.35s; }
+  .slot:nth-child(8) { animation-delay: 0.4s; }
+  .slot:nth-child(9) { animation-delay: 0.45s; }
+
+  /* ===== SIMULATED HAUPTSEITE BANNER ===== */
+  .hauptseite-hint {
+    display: none;
+  }
+
+  /* In the /buehnenprogramm page this would show on mobile: */
+  .show-hauptseite-hint .hauptseite-hint {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--blau);
+    color: var(--weiss);
+    padding: 10px 16px;
+    font-size: 13px;
+    gap: 12px;
+  }
+
+  .hauptseite-hint a {
+    background: var(--gelb);
+    color: var(--blau-deep);
+    padding: 6px 14px;
+    border-radius: 16px;
+    font-weight: 800;
+    font-size: 12px;
+    text-decoration: none;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header" role="banner">
+  <div class="logo-text" aria-label="Südstadtfest">Südstadtfest</div>
+  <div class="logo-sub">Köln · Bonner Straße</div>
+</header>
+
+<!-- LIVE BANNER (shows on fest days) -->
+<div class="now-banner" id="nowBanner" role="status" aria-live="polite">
+  <span class="now-dot" aria-hidden="true"></span> Jetzt auf der Bühne
+</div>
+
+<!-- STICKY TABS -->
+<nav class="tabs-wrapper" role="tablist" aria-label="Programmtage">
+  <div class="tabs">
+    <button class="tab active" onclick="switchDay('sa')" id="tabSa" role="tab" aria-selected="true" aria-controls="daySa">
+      <span class="tab-day">Samstag</span>
+      <span class="tab-date">13. Juni 2026</span>
+    </button>
+    <button class="tab" onclick="switchDay('so')" id="tabSo" role="tab" aria-selected="false" aria-controls="daySo">
+      <span class="tab-day">Sonntag</span>
+      <span class="tab-date">14. Juni 2026</span>
+    </button>
+  </div>
+</nav>
+
+<!-- SAMSTAG -->
+<div class="day-content active" id="daySa" role="tabpanel" aria-labelledby="tabSa">
+  <div class="timeline">
+
+    <div class="slot" data-time="2026-06-13T13:00">
+      <div class="slot-time">
+        <div class="time-value">13:00</div>
+        <div class="time-label">Uhr</div>
+      </div>
+      <div class="slot-info">
+        <div class="act-name">Eröffnung</div>
+        <div class="act-badge badge-live">Bühne Südstadt</div>
+      </div>
+    </div>
+
+    <div class="slot" data-time="2026-06-13T14:00">
+      <div class="slot-time">
+        <div class="time-value">14:00</div>
+        <div class="time-label">Uhr</div>
+      </div>
+      <div class="slot-info">
+        <div class="act-name">Kölsche Fründe</div>
+      </div>
+    </div>
+
+    <div class="slot" data-time="2026-06-13T15:00">
+      <div class="slot-time">
+        <div class="time-value">15:00</div>
+        <div class="time-label">Uhr</div>
+      </div>
+      <div class="slot-info">
+        <div class="act-name">Gymnasium Band</div>
+      </div>
+    </div>
+
+    <div class="slot" data-time="2026-06-13T16:00">
+      <div class="slot-time">
+        <div class="time-value">16:00</div>
+        <div class="time-label">Uhr</div>
+      </div>
+      <div class="slot-info">
+        <div class="act-name">Bumbas Band</div>
+      </div>
+    </div>
+
+    <div class="slot" data-time="2026-06-13T17:00">
+      <div class="slot-time">
+        <div class="time-value">17:00</div>
+        <div class="time-label">Uhr</div>
+      </div>
+      <div class="slot-info">
+        <div class="act-name">Leon Brooks and Friends</div>
+        <div class="act-meta">bis 22:00</div>
+        <div class="act-badge badge-highlight">Headliner</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    <div class="footer-social">
+      <a href="https://www.instagram.com/suedstadtfest.koeln/" target="_blank" rel="noopener">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        @suedstadtfest.koeln
+      </a>
+    </div>
+    <div class="footer-copy">© Südstadtfest Köln 2026 · RutWiess Events GmbH</div>
+  </div>
+</div>
+
+<!-- SONNTAG -->
+<div class="day-content" id="daySo" role="tabpanel" aria-labelledby="tabSo">
+  <div class="timeline">
+
+    <div class="slot" data-time="2026-06-14T13:00">
+      <div class="slot-time">
+        <div class="time-value">13:00</div>
+        <div class="time-label">Uhr</div>
+      </div>
+      <div class="slot-info">
+        <div class="act-name">Feierabendchor</div>
+      </div>
+    </div>
+
+    <div class="slot" data-time="2026-06-14T14:00">
+      <div class="slot-time">
+        <div class="time-value">14:00</div>
+        <div class="time-label">Uhr</div>
+      </div>
+      <div class="slot-info">
+        <div class="act-name">Gymnasium Band</div>
+      </div>
+    </div>
+
+    <div class="slot" data-time="2026-06-14T15:00">
+      <div class="slot-time">
+        <div class="time-value">15:00</div>
+        <div class="time-label">Uhr</div>
+      </div>
+      <div class="slot-info">
+        <div class="act-name">Kempes Fines</div>
+      </div>
+    </div>
+
+    <div class="slot" data-time="2026-06-14T16:00">
+      <div class="slot-time">
+        <div class="time-value">16:00</div>
+        <div class="time-label">Uhr</div>
+      </div>
+      <div class="slot-info">
+        <div class="act-name">Drummerholics</div>
+      </div>
+    </div>
+
+    <div class="slot" data-time="2026-06-14T16:30">
+      <div class="slot-time">
+        <div class="time-value">16:30</div>
+        <div class="time-label">Uhr</div>
+      </div>
+      <div class="slot-info">
+        <div class="act-name">Mike Müller</div>
+      </div>
+    </div>
+
+    <div class="slot" data-time="2026-06-14T18:00">
+      <div class="slot-time">
+        <div class="time-value">18:00</div>
+        <div class="time-label">Uhr</div>
+      </div>
+      <div class="slot-info">
+        <div class="act-name">Druckluft</div>
+      </div>
+    </div>
+
+    <div class="slot" data-time="2026-06-14T19:00">
+      <div class="slot-time">
+        <div class="time-value">19:00</div>
+        <div class="time-label">Uhr</div>
+      </div>
+      <div class="slot-info">
+        <div class="act-name">Kuhl un de Gäng</div>
+        <div class="act-badge badge-highlight">Highlight</div>
+      </div>
+    </div>
+
+    <div class="slot" data-time="2026-06-14T20:00">
+      <div class="slot-time">
+        <div class="time-value">20:00</div>
+        <div class="time-label">Uhr</div>
+      </div>
+      <div class="slot-info">
+        <div class="act-name">King Loui</div>
+      </div>
+    </div>
+
+    <div class="slot" data-time="2026-06-14T21:00">
+      <div class="slot-time">
+        <div class="time-value">21:00</div>
+        <div class="time-label">Uhr</div>
+      </div>
+      <div class="slot-info">
+        <div class="act-name">Knallblech</div>
+        <div class="act-badge badge-highlight">Finale</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    <div class="footer-social">
+      <a href="https://www.instagram.com/suedstadtfest.koeln/" target="_blank" rel="noopener">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        @suedstadtfest.koeln
+      </a>
+    </div>
+    <div class="footer-copy">© Südstadtfest Köln 2026 · RutWiess Events GmbH</div>
+  </div>
+</div>
+
+<!-- CROSS-LINK BANNER (fixed bottom) -->
+<div class="cross-link">
+  <span class="cross-link-text">Mehr über das Fest</span>
+  <a href="https://suedstadtfest-koeln.de" class="cross-link-btn">suedstadtfest-koeln.de →</a>
+</div>
+
+<script>
+  // === DEMO MODE ===
+  // Set to null for production (uses real time)
+  // Set to a date string to simulate being at the fest:
+  const DEMO_TIME = '2026-06-14T16:15:00';
+  // const DEMO_TIME = null;
+
+  function getNow() {
+    return DEMO_TIME ? new Date(DEMO_TIME) : new Date();
+  }
+
+  // === TAB SWITCHING ===
+  function switchDay(day) {
+    document.querySelectorAll('.day-content').forEach(d => d.classList.remove('active'));
+    document.querySelectorAll('.tab').forEach(t => {
+      t.classList.remove('active');
+      t.setAttribute('aria-selected', 'false');
+    });
+
+    const panel = document.getElementById('day' + day.charAt(0).toUpperCase() + day.slice(1));
+    const tab = document.getElementById('tab' + day.charAt(0).toUpperCase() + day.slice(1));
+    panel.classList.add('active');
+    tab.classList.add('active');
+    tab.setAttribute('aria-selected', 'true');
+
+    // Re-trigger stagger animation
+    const slots = panel.querySelectorAll('.slot');
+    slots.forEach((slot, i) => {
+      slot.style.animation = 'none';
+      slot.offsetHeight;
+      slot.style.animation = `slot-in 0.35s ease forwards`;
+      slot.style.animationDelay = `${i * 0.05}s`;
+    });
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    updateAll();
+  }
+
+  // === FORMAT TIME DIFFERENCE ===
+  function formatDiff(ms) {
+    const mins = Math.round(ms / 60000);
+    if (mins < 60) return `${mins} min`;
+    const h = Math.floor(mins / 60);
+    const m = mins % 60;
+    return m > 0 ? `${h} h ${m} min` : `${h} h`;
+  }
+
+  // === UPDATE MARKERS + TIMERS ===
+  function updateAll() {
+    const now = getNow();
+    const activeDay = document.querySelector('.day-content.active');
+    const slots = activeDay.querySelectorAll('.slot[data-time]');
+    const banner = document.getElementById('nowBanner');
+
+    // Clean up
+    slots.forEach(s => {
+      s.classList.remove('now', 'past');
+      let timer = s.querySelector('.act-timer');
+      if (timer) timer.remove();
+    });
+    banner.classList.remove('visible');
+
+    let currentSlot = null;
+
+    slots.forEach((slot, i) => {
+      const slotTime = new Date(slot.dataset.time);
+      const nextSlot = slots[i + 1];
+      const nextTime = nextSlot ? new Date(nextSlot.dataset.time) : new Date(slotTime.getTime() + 60 * 60000);
+      const diff = slotTime - now;
+      const info = slot.querySelector('.slot-info');
+
+      // Create timer element
+      const timer = document.createElement('div');
+      timer.className = 'act-timer';
+
+      if (now >= nextTime && nextSlot) {
+        // Past act
+        slot.classList.add('past');
+        timer.classList.add('visible', 'timer-past');
+        timer.innerHTML = '<span class="timer-icon">✓</span> vorbei';
+      } else if (now >= slotTime && now < nextTime) {
+        // Currently playing
+        currentSlot = slot;
+        slot.classList.add('now');
+        const remaining = nextTime - now;
+        timer.classList.add('visible', 'timer-now');
+        timer.innerHTML = `<span class="timer-icon">♪</span> noch ${formatDiff(remaining)}`;
+      } else if (diff > 0 && diff <= 90 * 60000) {
+        // Coming up soon (within 90 min)
+        timer.classList.add('visible', 'timer-next');
+        timer.innerHTML = `<span class="timer-icon">⏱</span> in ${formatDiff(diff)}`;
+      } else if (diff > 0) {
+        // Later
+        timer.classList.add('visible', 'timer-later');
+        timer.innerHTML = `<span class="timer-icon">⏱</span> in ${formatDiff(diff)}`;
+      }
+
+      info.appendChild(timer);
+    });
+
+    if (currentSlot) {
+      banner.classList.add('visible');
+      const actName = currentSlot.querySelector('.act-name').textContent;
+      banner.innerHTML = `<span class="now-dot" aria-hidden="true"></span> Jetzt: <strong>${actName}</strong>`;
+    }
+  }
+
+  // === AUTO-SELECT CORRECT DAY ===
+  function autoSelectDay() {
+    const now = getNow();
+    if (now.toDateString() === new Date('2026-06-14').toDateString()) {
+      switchDay('so');
+    }
+  }
+
+  // Init
+  autoSelectDay();
+  updateAll();
+
+  // Update every 30 seconds
+  setInterval(updateAll, 30000);
+</script>
+
+</body>
+</html>
