@@ -13,6 +13,20 @@
      Production: Assistant als woff2 lokal gehostet, kein Google Fonts CDN
   */
 
+  @font-face {
+    font-family: 'ITC Officina Serif';
+    src: url('fonts/itc-officina-serif-std-bold-58b37d4ef28b0.otf') format('opentype');
+    font-weight: 700;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'ITC Officina Serif';
+    src: url('fonts/itc-officina-serif-std-book-58703733c9fd5.otf') format('opentype');
+    font-weight: 400;
+    font-style: normal;
+  }
+
   :root {
     --blau: #4054B2;
     --blau-deep: #2A3A8C;
@@ -80,8 +94,9 @@
   }
 
   .logo-text {
+    font-family: 'ITC Officina Serif', serif;
     font-size: 26px;
-    font-weight: 800;
+    font-weight: 700;
     letter-spacing: 0.5px;
     text-transform: uppercase;
     position: relative;
