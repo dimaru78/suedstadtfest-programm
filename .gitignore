@@ -1,5 +1,9 @@
+# Vercel
 .vercel/
+
+# OS-Dateien
 .DS_Store
 Thumbs.db
 
-.vercel
+# Claude Code (lokale Einstellungen & Worktrees)
+.claude/
