@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#4054B2">
-<title>Programm · Südstadtfest Köln 2026</title>
-<meta name="description" content="Bühnenprogramm Südstadtfest Köln – 13. & 14. Juni 2026. Wer spielt wann auf der Bonner Straße.">
+<title>Programm · Südstadtfest Köln 2027</title>
+<meta name="description" content="Bühnenprogramm Südstadtfest Köln – 12. & 13. Juni 2027. Wer spielt wann auf der Bonner Straße.">
 <style>
   @font-face {
     font-family: 'Assistant';
@@ -553,9 +553,77 @@
     white-space: nowrap;
     flex-shrink: 0;
   }
+
+  /* ===== PLATZHALTER (vorläufige Ansicht 2027) ===== */
+  .placeholder {
+    display: none;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 56px 24px 120px;
+    text-align: center;
+  }
+
+  /* Vorläufige Ansicht: Platzhalter zeigen, Programm-Teile ausblenden.
+     Das Ausblenden verhindert ein Aufblitzen, bevor das Skript die
+     Elemente aus dem DOM nimmt. */
+  .preliminary .placeholder { display: block; }
+  .preliminary .tabs-wrapper,
+  .preliminary .now-banner,
+  .preliminary .day-content { display: none; }
+
+  .ph-date {
+    display: inline-block;
+    background: var(--gelb);
+    color: var(--blau-deep);
+    font-size: 18px;
+    font-weight: 800;
+    padding: 9px 20px;
+    border-radius: 24px;
+    letter-spacing: 0.3px;
+  }
+
+  .ph-days {
+    margin-top: 14px;
+    color: var(--grau-500);
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+  }
+
+  .ph-title {
+    margin-top: 28px;
+    font-family: 'ITC Officina Serif', serif;
+    font-size: 27px;
+    font-weight: 700;
+    line-height: 1.25;
+    color: var(--text);
+  }
+
+  .ph-text {
+    margin-top: 16px;
+    font-size: 17px;
+    line-height: 1.55;
+    color: var(--grau-800);
+  }
+
+  .ph-cta {
+    display: inline-block;
+    margin-top: 30px;
+    background: var(--blau);
+    color: var(--weiss);
+    font-size: 15px;
+    font-weight: 800;
+    padding: 14px 28px;
+    border-radius: 28px;
+    text-decoration: none;
+    transition: transform 0.15s ease;
+  }
+
+  .ph-cta:active { transform: scale(0.97); }
 </style>
 </head>
-<body>
+<body class="preliminary">
 
 <!-- HEADER -->
 <header class="header" role="banner">
@@ -567,6 +635,15 @@
 <div class="now-banner" id="nowBanner" role="status" aria-live="polite">
   <span class="now-dot" aria-hidden="true"></span> Jetzt auf der Bühne
 </div>
+
+<!-- VORLÄUFIGE ANSICHT (sichtbar, solange PROGRAMM_2027_LIVE = false) -->
+<section class="placeholder" id="vorlaeufig" aria-labelledby="ph-title">
+  <div class="ph-date">12. &amp; 13. Juni 2027</div>
+  <div class="ph-days">Samstag &amp; Sonntag</div>
+  <h1 class="ph-title" id="ph-title">Das Programm 2027 entsteht gerade</h1>
+  <p class="ph-text">Wir stellen das Bühnenprogramm fürs nächste Südstadtfest zusammen. Das komplette Line-up findet ihr hier in Kürze.</p>
+  <a class="ph-cta" href="https://www.instagram.com/suedstadtfest.koeln/" target="_blank" rel="noopener">Updates auf Instagram →</a>
+</section>
 
 <!-- STICKY TABS -->
 <nav class="tabs-wrapper" role="tablist" aria-label="Programmtage">
@@ -822,6 +899,12 @@
 </div>
 
 <script>
+  // === PROGRAMM-MODUS ===
+  // false = vorläufige Ansicht (Platzhalter). Das komplette Programm bleibt
+  //         unten im HTML als Referenz erhalten, wird aber nicht angezeigt.
+  // true  = fertiges Programm live schalten (Tabs + Timeline + Live-Timer).
+  const PROGRAMM_2027_LIVE = false;
+
   // === DEMO MODE ===
   // Set to null for production (uses real time)
   // Set to a date string to simulate being at the fest:
@@ -935,12 +1018,20 @@
     }
   }
 
-  // Init
-  autoSelectDay();
-  updateAll();
-
-  // Update every 30 seconds
-  setInterval(updateAll, 30000);
+  // === INIT ===
+  if (PROGRAMM_2027_LIVE) {
+    // Programm anzeigen, Platzhalter entfernen
+    document.body.classList.remove('preliminary');
+    document.getElementById('vorlaeufig')?.remove();
+    autoSelectDay();
+    updateAll();
+    setInterval(updateAll, 30000); // alle 30 Sekunden aktualisieren
+  } else {
+    // Vorläufige Ansicht: Programm-Elemente aus dem DOM nehmen.
+    // Das HTML bleibt im Quelltext als Referenz fürs nächste Jahr erhalten.
+    document.querySelectorAll('.tabs-wrapper, .now-banner, .day-content')
+      .forEach(el => el.remove());
+  }
 </script>
 
 </body>
